@@ -1,45 +1,41 @@
-order =3;
 
-module MengerSponge(side = 90, order =2){
+module MengerSponge(side = 270, order =2){
     difference(){
         cube([side,side,side],center=true);
-        MengerSponge_aux(side);
+        MengerSponge_aux1(side, order);
     }
     }
-    
- module MengerSponge_aux(side = 90, order = 3, order_count=0){
-     if (order>0){
-         magic_number=pow(3, order_count);
-         new_side= side / (3*magic_number);
-         measures_array=[
-         [side, new_side, new_side],
-         [new_side, side, new_side],
-         [new_side, new_side, side]];
-         for(measures = measures_array){
-             cube(measures, center=true);
-             }
-             }
-    else{
-        %cylinder(h=100, r=50);
+module MengerSponge_aux1(side, order){
+    rotations=[
+    [90,0,0],
+    [0,90,0],
+    [0,0,90],
+    ];
+    for(rotation=rotations){
+        rotate(rotation)
+    MengerSponge_aux2(side, order);
         }
-    }
-
-    
- module holes_generator(side, order){
-     magic_number=pow(3, order_count);
-     new_side= side / (3*magic_number);
-     measures=[side, new_side, new_side];
-     for(i=[1:magic_number]){
-         translate([(size/magic_number)*i,0,0])
-         cube(measures, center=true);
-         }
-     
-     }
-   // MengerSponge();
- translate([-(270-30)/2,0,0])
-for(i=[0:8]){
-translate([30*i,0,0
-     ])
-cube([10,10,30],center=true);
-
 }
+
+
+ module MengerSponge_aux2(side, order){
+     if(order>0){
+        translate([0,-(side-(side/pow(3,order-1)))/2,0])
+            for(i=[0:pow(3,order-1)-1]){
+                translate([0,(side/pow(3,order-1))*i,0])
+                    translate([-(side-(side/pow(3,order-1)))/2,0,0])
+                        for(i=[0:pow(3,order-1)-1]){
+                            translate([(side/pow(3,order-1))*i,0,0])
+                                cube([(side/pow(3,order)),(side/pow(3,order)),side],center=true);
+            }
+        }
+        MengerSponge_aux2(side, order-1);
+     }
+     else{
+         echo("terminado");
+     }
+ }
+   // MengerSponge();
+side=270;
+order=3;
+MengerSponge(side, 3);
