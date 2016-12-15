@@ -1,4 +1,9 @@
-
+//author Gustavo Segura <gsegura96@openmailbox.org>
+/* ToDo:
+* Document the code
+* Add license
+* Optimize
+*/
 module MengerSponge(side = 270, order =2){
     difference(){
         cube([side,side,side],center=true);
@@ -35,7 +40,6 @@ module MengerSponge_aux1(side, order){
          echo("terminado");
      }
  }
-   // MengerSponge();
 side=270;
-order=3;
-MengerSponge(side, 3);
+order=2;//Dont save with a number higher than 4, OpenSCAD will collapse when trying to render it.
+MengerSponge(side, order);
