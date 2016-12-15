@@ -1,5 +1,4 @@
 order =3;
-side=90;
 
 module MengerSponge(side = 90, order =2){
     difference(){
@@ -8,14 +7,14 @@ module MengerSponge(side = 90, order =2){
     }
     }
     
- module MengerSponge_aux(side = 90, order = 3){
+ module MengerSponge_aux(side = 90, order = 3, order_count=0){
      if (order>0){
-         new_side=side/3;
+         magic_number=pow(3, order_count);
+         new_side= side / (3*magic_number);
          measures_array=[
-         [new_side, new_side, side],
+         [side, new_side, new_side],
          [new_side, side, new_side],
-         [side, new_side, new_side]
-         ];
+         [new_side, new_side, side]];
          for(measures = measures_array){
              cube(measures, center=true);
              }
@@ -24,4 +23,23 @@ module MengerSponge(side = 90, order =2){
         %cylinder(h=100, r=50);
         }
     }
- MengerSponge();
+
+    
+ module holes_generator(side, order){
+     magic_number=pow(3, order_count);
+     new_side= side / (3*magic_number);
+     measures=[side, new_side, new_side];
+     for(i=[1:magic_number]){
+         translate([(size/magic_number)*i,0,0])
+         cube(measures, center=true);
+         }
+     
+     }
+   // MengerSponge();
+ translate([-(270-30)/2,0,0])
+for(i=[0:8]){
+translate([30*i,0,0
+     ])
+cube([10,10,30],center=true);
+
+}
