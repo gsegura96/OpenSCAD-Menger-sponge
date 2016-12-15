@@ -26,7 +26,7 @@ module MengerSponge_aux1(side, order){
                     translate([-(side-(side/pow(3,order-1)))/2,0,0])
                         for(i=[0:pow(3,order-1)-1]){
                             translate([(side/pow(3,order-1))*i,0,0])
-                                cube([(side/pow(3,order))+1,(side/pow(3,order))+1,side+1],center=true);
+                                cube([(side/pow(3,order)),(side/pow(3,order)),side+1],center=true);
             }
         }
         MengerSponge_aux2(side, order-1);
